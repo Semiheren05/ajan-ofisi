@@ -1,0 +1,141 @@
+{
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "UserPromptSubmit": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "PreToolUse": [
+      {
+        "matcher": "*",
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SubagentStart": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "Notification": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ],
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "http",
+            "url": "http://localhost:8080/api/hooks",
+            "headers": {
+              "X-Hook-Token": "$AJAN_OFISI_TOKEN"
+            },
+            "allowedEnvVars": [
+              "AJAN_OFISI_TOKEN"
+            ],
+            "timeout": 3
+          }
+        ]
+      }
+    ]
+  }
+}
