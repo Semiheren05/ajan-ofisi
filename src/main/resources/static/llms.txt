@@ -1,0 +1,14 @@
+# Ajan Ofisi
+
+> Claude Code'un ana ajanını ve alt ajanlarını piksel art bir ofiste canlı gösteren yerel bir araç. Claude Code hook olaylarını (SessionStart, UserPromptSubmit, PreToolUse, SubagentStart, SubagentStop, Notification, Stop, SessionEnd) bir Spring Boot API'si alır, PostgreSQL'e kaydeder ve Server-Sent Events ile sayfaya iletir.
+
+Uygulama geliştiricinin kendi bilgisayarında çalışır (varsayılan adres http://localhost:8080). Saklanan veriler kısa etiketlerdir: dosya adı, komut açıklaması, görevin ilk kelimeleri; dosya içerikleri saklanmaz.
+
+## Sayfalar
+- [Ofis](/): ana ajanın ve alt ajanların canlı olarak çalıştığı piksel art sahne, olay günlüğü ve demo modu
+- [API belgeleri](/swagger-ui.html): hook alımı, oturum listesi, oturum olayları ve canlı yayın uçlarının Swagger arayüzü
+
+## API
+- [POST /api/hooks](/swagger-ui.html): Claude Code'un HTTP hook olarak gönderdiği olayları alır, X-Hook-Token başlığı ister
+- [GET /api/sessions](/swagger-ui.html): oturumlar, en son etkin olan önce
+- [GET /api/stream](/swagger-ui.html): yeni olayları "office-event" adıyla yayınlayan Server-Sent Events akışı

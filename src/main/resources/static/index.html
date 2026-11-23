@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Ajan Ofisi – Claude Code alt ajanları canlı</title>
+    <meta name="description" content="Claude Code'un ana ajanını ve alt ajanlarını piksel art bir ofiste canlı izle: kim hangi dosyayı okuyor, hangi komutu çalıştırıyor, ne zaman bitiriyor.">
+    <meta name="robots" content="noindex">
+    <meta property="og:title" content="Ajan Ofisi – Claude Code alt ajanları canlı">
+    <meta property="og:description" content="Claude Code alt ajanlarını piksel art bir ofiste, hook olaylarıyla canlı gösteren panel.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/favicon-192.png">
+    <meta name="twitter:card" content="summary">
+    <link rel="icon" href="/favicon.ico" sizes="48x48">
+    <link rel="icon" type="image/png" sizes="48x48" href="/favicon-48.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/favicon-192.png">
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="stylesheet" href="/css/office.css">
+</head>
+<body>
+<header class="bar">
+    <img src="/favicon-48.png" alt="" width="24" height="24" class="logo">
+    <h1>Ajan Ofisi</h1>
+    <span id="project" class="project" title="Proje klasörü"></span>
+    <span id="status" class="status wait">Bağlanıyor</span>
+    <button id="demo" type="button">Demoyu oynat</button>
+</header>
+<main>
+    <div id="stage" class="stage">
+        <canvas id="office" width="960" height="540" aria-label="Ana ajanın ve alt ajanların çalıştığı piksel art ofis"></canvas>
+    </div>
+    <section class="panel" aria-labelledby="log-title">
+        <h2 id="log-title">Olaylar</h2>
+        <ul id="log" class="log"></ul>
+    </section>
+    <p class="hint">Claude Code'da alt ajan kullanan bir görev başlat; ajanlar kapıdan girip masalarına oturacak.
+        Kurulum için README'deki "Claude Code'a bağlama" bölümüne bak. API belgeleri: <a href="/swagger-ui.html">Swagger UI</a>.</p>
+</main>
+<script src="/js/office.js"></script>
+</body>
+</html>

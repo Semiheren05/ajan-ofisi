@@ -1,0 +1,3 @@
+# Ajan Ofisi kendi bilgisayarında çalışan bir araçtır; taranacak herkese açık içerik yok.
+User-agent: *
+Disallow: /
