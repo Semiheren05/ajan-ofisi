@@ -1,0 +1,57 @@
+package com.semih.ajanofisi.security;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.semih.ajanofisi.common.Problems;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ProblemDetail;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.web.access.AccessDeniedHandler;
+
+import java.io.IOException;
+import java.net.URI;
+import java.time.Clock;
+
+/**
+ * Security errors happen in the filter chain, before controllers and
+ * {@code @RestControllerAdvice} are reached, so they need their own handler to
+ * return the same problem-detail JSON as the rest of the API.
+ */
+public class ProblemDetailSecurityHandler implements AuthenticationEntryPoint, AccessDeniedHandler {
+
+    private final ObjectMapper objectMapper;
+    private final Clock clock;
+
+    public ProblemDetailSecurityHandler(ObjectMapper objectMapper, Clock clock) {
+        this.objectMapper = objectMapper;
+        this.clock = clock;
+    }
+
+    @Override
+    public void commence(HttpServletRequest request, HttpServletResponse response,
+                         AuthenticationException authException) throws IOException {
+        write(request, response, HttpStatus.UNAUTHORIZED, "Unauthorized",
+                "A valid X-Hook-Token header is required");
+    }
+
+    @Override
+    public void handle(HttpServletRequest request, HttpServletResponse response,
+                       AccessDeniedException accessDeniedException) throws IOException {
+        write(request, response, HttpStatus.FORBIDDEN, "Forbidden",
+                "You do not have permission to access this resource");
+    }
+
+    private void write(HttpServletRequest request, HttpServletResponse response,
+                       HttpStatus status, String title, String detail) throws IOException {
+        ProblemDetail problem = Problems.of(status, title, detail, clock.instant());
+        problem.setInstance(URI.create(request.getRequestURI()));
+
+        response.setStatus(status.value());
+        response.setContentType(MediaType.APPLICATION_PROBLEM_JSON_VALUE);
+        objectMapper.writeValue(response.getOutputStream(), problem);
+    }
+}
