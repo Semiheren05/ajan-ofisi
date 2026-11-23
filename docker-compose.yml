@@ -1,0 +1,32 @@
+services:
+  db:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_DB: ajanofisi
+      POSTGRES_USER: ajanofisi
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-ajanofisi}
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ajanofisi -d ajanofisi"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  app:
+    build: .
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DB_URL: jdbc:postgresql://db:5432/ajanofisi
+      DB_USERNAME: ajanofisi
+      DB_PASSWORD: ${DB_PASSWORD:-ajanofisi}
+      AJAN_OFISI_TOKEN: ${AJAN_OFISI_TOKEN:?Set AJAN_OFISI_TOKEN in .env (see .env.example)}
+      EVENT_RETENTION: ${EVENT_RETENTION:-7d}
+    ports:
+      # Only this computer can open the office: the page has no login
+      - "127.0.0.1:8080:8080"
+
+volumes:
+  db-data:
