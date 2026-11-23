@@ -1,0 +1,8 @@
+# Test-only settings, loaded on top of src/main/resources/application.yml.
+# Every test class shares them, so they all reuse one Spring context.
+app:
+  hook:
+    token: test-hook-token-1234567890
+  stream:
+    # No pings while tests run
+    heartbeat: PT1H
