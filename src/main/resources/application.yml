@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: ajan-ofisi
+  datasource:
+    url: ${DB_URL:jdbc:postgresql://localhost:5432/ajanofisi}
+    username: ${DB_USERNAME:ajanofisi}
+    password: ${DB_PASSWORD:ajanofisi}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate   # schema is owned by Flyway migrations
+  flyway:
+    enabled: true
+
+server:
+  port: ${PORT:8080}
+  forward-headers-strategy: framework
+  error:
+    include-stacktrace: never
+    include-message: never
+
+app:
+  hook:
+    # Dev-only default. Set AJAN_OFISI_TOKEN (e.g. `openssl rand -hex 24`) and use the same value in Claude Code.
+    token: ${AJAN_OFISI_TOKEN:dev-only-hook-token-change-me}
+  office:
+    retention: ${EVENT_RETENTION:7d}
+  stream:
+    timeout: ${STREAM_TIMEOUT:30m}
+    heartbeat: ${STREAM_HEARTBEAT:PT20S}   # ISO-8601, also read by @Scheduled
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+logging:
+  level:
+    com.semih.ajanofisi: ${LOG_LEVEL:info}
